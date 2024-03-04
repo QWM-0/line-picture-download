@@ -9,7 +9,6 @@ import configparser
 agent = {
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36 Edg/100.0.1185.36',
     'Connection':'close',
-
 }
 
 def writeToFile(item,path,opt):
@@ -56,6 +55,9 @@ def download(url,save_path,proxies):
 
 def getConfig():
     config = configparser.ConfigParser()
+    if not os.path.exists(os.getcwd() + '/config.ini'):
+        with open(os.getcwd() + '/config.ini','w',encoding='utf-8') as file:
+            file.write('[option]' + '\n' + 'save_path = ' + '\n' + '[proxy]' + '\n' + 'http = ' + '\n' + 'https = ')
     config.read(os.getcwd() + '/config.ini',encoding='utf-8')
     if config.get('option','save_path') != '':
         save_path = config.get('option','save_path')
